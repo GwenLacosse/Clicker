@@ -1,0 +1,7 @@
+{
+  "name": "clickers",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
