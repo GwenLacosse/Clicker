@@ -1,5 +1,36 @@
 <ion-content [fullscreen]="true">
-  <div id="container">
-    <p>Let's dev</p>
+  <div id="grid">
+    <div id="stuff">
+      <div class="item" *ngFor="let item of stuff">
+        <div class="img">
+          <img src="assets/stuff/{{item.img}}.svg" alt="">
+        </div>
+        <div class="item-desc">
+          <h2>{{item.name}} <span>lvl: {{item.lvl}}</span></h2>
+          <p>{{item.effect}}</p>
+          <p>{{item.price}} gold</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="bg">
+      <div class="enemy">
+        <div [class.dead]="inDead"class="sprite" (click)="doDamage()"></div>
+        <div class="life-container">
+          <div class="life" [ngStyle]="{'width': enemy.percent + '%'}">
+            <span>{{enemy.percent}}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="displayStats" id="statBar">
+    <span>Gold: {{gold}} pièces d'or</span>
+    <span>Vie de l'ennmi Courant: {{enemy.currentLife}}</span>
+    <span>Nombre d'ennemi tués dans le niveau: {{enemyLevelKilled}}</span>
+    <span>Nombre d'ennemi total tués: {{totalEnemiKilled}}</span>
+    <span>Niveau actuel dans le palier: {{level}}</span>
+    <span>Palier actuel: {{palier}}</span>
   </div>
 </ion-content>

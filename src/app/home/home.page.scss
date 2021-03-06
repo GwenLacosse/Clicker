@@ -1,27 +1,116 @@
-#container {
-  text-align: center;
+#grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+
+  #stuff {
+    min-height: 100vh;
+    background: #0b0b0b;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+      padding: 24px;
+      background: #000000;
+      border-radius: 4px;
+      margin: 16px;
+
+      .img {
+        max-width: 100px;
+        min-width: 100px;
+        min-height: 100px;
+        padding: 16px;
+        background: #0b0b0b;
+        border-radius: 4px;
+      }
+      .item-desc {
+        display: flex;
+        flex-direction: column;
+        
+        * {
+          margin: 0;
+        };
+        
+        h2 {
+          margin-bottom: 16px;
+          color: rgb(173, 173, 173);
+        }
+      }
+    }
+  }
+
+  #bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    .enemy {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .sprite {
+        min-width: 300px;
+        background-image: url("/assets/enemies/1/wizard idle.png");
+        background-size: cover;
+        background-position: 300px;
+        animation: sprite 0.4s infinite alternate steps(3);
+        min-height: 300px;
+
+        @keyframes sprite {
+          100% {background-position: 1200px;}
+        }
+
+        &.dead {
+          background-image: url("/assets/enemies/1/wizard death.png");
+          background-size: cover;
+          background-position: 0px;
+          animation: death 1s steps(10) both;
+          @keyframes death {
+            100% {background-position: -3000px;}
+          }
+        }
+      }
+
+      .life-container {
+        border: 3px solid black;
+        width: 100%;
+        min-height: 24px;
+        position: relative;
+        background: #585858;
+
+        .life {
+          height: 100%;
+          min-height: 24px;
+          width: 100%;
+          background: lightgreen;
+
+          span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 24px;
+            line-height: 2;
+            color: #000;
+          }
+        }
+      }
+    }
+  }
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+#statBar {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding: 24px;
+  position: fixed;
+  bottom: 0;
+  min-width: 100%;
+  background: #000;
 }
