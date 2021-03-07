@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  @ViewChild('enemyDiv') enemyElement: ElementRef
+  @ViewChild('shlas') shlasElement: ElementRef
   public damage:number = 1
   public gold:number = 0
   public critMultiplier:number = 2
@@ -78,7 +80,8 @@ export class HomePage {
 
   }
 
-  public doDamage() {
+  public doDamage(event) {
+    this.shlas(event)
     this.enemy.currentLife = this.enemy.currentLife - this.sword.damage
     if (this.enemy.currentLife == 0) {
       this.enemy.currentLife = this.enemy.maxLife
@@ -109,6 +112,23 @@ export class HomePage {
     }
     this.gold = Math.ceil(this.gold + this.enemy.gold)
     this.enemy.percent = Math.round((this.enemy.currentLife / this.enemy.maxLife) * 100);
+    this.enemyElement.nativeElement.classList.add('shake')
+    setTimeout(() => {
+      this.enemyElement.nativeElement.classList.remove('shake')
+    }, 200);
+  }
+
+  public shlas (event) {
+    let r = Math.floor(Math.random() * (145 - 120 + 1) + 110);
+    this.shlasElement.nativeElement.style.opacity = 1
+    this.shlasElement.nativeElement.style.width = '200px'
+    this.shlasElement.nativeElement.style.transform = `rotate(${r}deg)`
+    this.shlasElement.nativeElement.style.left = `${event.clientX - 50}px`
+    this.shlasElement.nativeElement.style.top = `${event.clientY}px`
+    setTimeout(() => {
+      this.shlasElement.nativeElement.style.opacity = 0
+    }, 200)
+    
   }
 
 }
