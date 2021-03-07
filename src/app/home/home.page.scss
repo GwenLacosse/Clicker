@@ -89,6 +89,23 @@
           width: 100%;
           transition: .2s;
           background: lightgreen;
+          box-shadow: 0px 0px 10px lightgreen;
+
+          &.high {
+            background: yellow;
+            box-shadow: 0px 0px 10px yellow;
+          }
+
+          &.medium {
+            background: orange;
+            box-shadow: 0px 0px 10px orange;
+          }
+
+          &.short {
+            background: orangered;
+            box-shadow: 0px 0px 10px orangered;
+          }
+
 
           span {
             position: absolute;
@@ -140,9 +157,9 @@
   width: 0px;
   transition: .1s;
   opacity: 0;
-  max-height: 5px;
-  min-height: 5px;
-  border: 1px solid red;
-  background: orange;
+  max-height: 8px;
+  min-height: 8px;
+  border: 2px solid red;
+  background: rgb(255, 238, 0);
   border-radius: 50%;
 }

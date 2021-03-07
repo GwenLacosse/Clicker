@@ -11,14 +11,16 @@
           <p>{{item.effect}}</p>
           <p>{{item.price}} gold</p>
         </div>
+        <button [disabled]="gold < item.price" (click)="buyItem(item)">Buy</button>
       </div>
     </div>
 
     <div id="bg">
       <div class="enemy" #enemyDiv>
+        <div id="timer">{{enemyTimer}}s</div>
         <div [class.dead]="inDead"class="sprite" (click)="doDamage($event)"></div>
         <div class="life-container">
-          <div class="life" [ngStyle]="{'width': enemy.percent + '%'}">
+          <div class="life" [ngStyle]="{'width': enemy.percent + '%'}" [class.high]="enemy.percent <= 60" [class.medium]="enemy.percent <= 40" [class.short]="enemy.percent <= 20">
             <span>{{enemy.percent}}%</span>
           </div>
         </div>
