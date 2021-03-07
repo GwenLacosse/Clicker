@@ -1,3 +1,11 @@
+ion-content {
+  overflow: hidden
+}
+
+ion-header {
+  img {cursor: pointer;}
+}
+
 #grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -162,4 +170,71 @@
   border: 2px solid red;
   background: rgb(255, 238, 0);
   border-radius: 50%;
+  z-index: 1000;
+  filter: blur(1px);
+}
+
+
+@media screen and (max-width: 1000px) {
+
+  #grid {
+    display: flex;
+    gap: 10px;
+    position: fixed;
+    top: 0;
+  }
+
+  #stuff {
+    position: absolute;
+    height: 100%;
+    overflow-y: scroll;
+    min-width: 100vw;
+    min-height: 100vh;
+    z-index: 20;
+    transition: .2s;
+    transform: translateX(-100%);
+
+    .close {
+      min-height: 40px;
+      cursor: pointer;
+
+      .menu-timer {
+        position: absolute;
+        top: 8px;
+        font-size: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .cross-toggle {
+        position: absolute;
+        font-size: 32px;
+        top: 8px;
+        right: 16px;
+      }
+    }
+  }
+
+  #bg {
+    position: fixed;
+    min-height: 100vh;
+    min-width: 100vw;
+    top: 0;
+    z-index: 10;
+  }
+  
+}
+
+@media screen and (min-width: 1000px) {
+  ion-header {
+    display: none;
+  }
+
+  .close {
+    display: none;
+  }
+
+  .timer {
+    display: none;
+  }
 }

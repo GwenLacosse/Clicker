@@ -20,6 +20,8 @@ export class HomePage {
   public inDead: boolean = false;
   public timeOut: any = null;
   public enemyTimer: number = 60;
+  public menuOpened: boolean = false
+  public win = window
 
   public enemy = {
     lvl: 1,
@@ -72,13 +74,16 @@ export class HomePage {
       effect: 'Crit Chance'
   }
   public stuff = [
-    this.sword, 
+    this.sword,
+    this.helmet, 
     this.cloak,
     this.gloves,
+    this.boots
   ]
 
   constructor() {
     this.enemyTime()
+    window['myClicker'] = this
   }
 
 
@@ -89,7 +94,7 @@ export class HomePage {
    * @param damage 
    */
   public doDamage(event = null, shlasAndShake = true, damage = null) {
-    this.enemy.currentLife = Math.floor(this.enemy.currentLife - (damage ? damage : this.sword.damage))
+    this.enemy.currentLife = Math.floor(this.enemy.currentLife - ((damage ? damage : this.sword.damage) * this.damage))
     if (this.enemy.currentLife <= 0) {
       this.enemy.currentLife = this.enemy.maxLife
       this.enemy.percent = Math.round((this.enemy.currentLife / this.enemy.maxLife) * 100);
@@ -163,7 +168,7 @@ export class HomePage {
     this[item.name].lvl++
     this.gold = this.gold - this[item.name].price
     this[item.name].price = Math.round((this[item.name].price + (this[item.name].price * this[item.name].lvl)))
-    this[item.name].price = this.palier % 3 == 0 ? Math.round(this[item.name].price / 2) : this[item.name].price 
+    this[item.name].price = this[item.name].lvl % 3 == 0 ? Math.round(this[item.name].price / 2) : this[item.name].price 
     switch (item.name) {
       case 'sword' :
         this.sword.damage = this.sword.damage + this.sword.damage
@@ -206,6 +211,11 @@ export class HomePage {
       }
       this.enemyTime()
     }, 1000)
+  }
+
+  public toggleMenu()
+  {
+    this.menuOpened = !this.menuOpened
   }
 
 

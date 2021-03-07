@@ -1,7 +1,16 @@
+<ion-header [ngStyle]="{'display': menuOpened ? 'none' : ''}">
+  <p style="padding-left: 15px;">
+    <img src="/assets/bag.svg" alt="" width="40px" (click)="toggleMenu()">
+  </p>
+</ion-header>
 <ion-content [fullscreen]="true">
   <div id="shlas" #shlas></div>
   <div id="grid">
-    <div id="stuff">
+    <div id="stuff" [ngStyle]="{'transform': menuOpened ? 'translateX(0)' : ''}">
+      <div class="close">
+        <span class="menu-timer">{{enemyTimer}}s</span>
+        <span class="cross-toggle" (click)="toggleMenu()">&times;</span>
+      </div>
       <div class="item" *ngFor="let item of stuff">
         <div class="img">
           <img src="assets/stuff/{{item.img}}.svg" alt="">
